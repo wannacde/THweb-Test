@@ -1,0 +1,56 @@
+@model THWeb_Test.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+
+<h1>Chi tiết sinh viên</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Mã sinh viên
+        </dt>
+        <dd class="col-sm-10">
+            @Model.MaSV
+        </dd>
+        <dt class="col-sm-2">
+            Họ tên
+        </dt>
+        <dd class="col-sm-10">
+            @Model.HoTen
+        </dd>
+        <dt class="col-sm-2">
+            Giới tính
+        </dt>
+        <dd class="col-sm-10">
+            @Model.GioiTinh
+        </dd>
+        <dt class="col-sm-2">
+            Ngày sinh
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.NgaySinh?.ToString("dd/MM/yyyy"))
+        </dd>
+        <dt class="col-sm-2">
+            Ngành học
+        </dt>
+        <dd class="col-sm-10">
+            @Model.NganhHoc?.TenNganh
+        </dd>
+        <dt class="col-sm-2">
+            Hình
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.Hinh))
+            {
+                <img src="@Url.Action("GetImage", "Images", new { filename = Model.Hinh })" alt="@Model.HoTen" style="max-width: 300px;" />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaSV" class="btn btn-warning">Sửa</a> |
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>

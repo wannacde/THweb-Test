@@ -1,0 +1,53 @@
+@model IEnumerable<THWeb_Test.Models.HocPhan>
+
+@{
+    ViewData["Title"] = "Danh sách học phần";
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="mb-0"><i class="fas fa-book me-2"></i>Danh sách học phần</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-hashtag me-1"></i> Mã HP</th>
+                        <th><i class="fas fa-book-open me-1"></i> Tên học phần</th>
+                        <th><i class="fas fa-award me-1"></i> Số tín chỉ</th>
+                        <th><i class="fas fa-users me-1"></i> Số lượng dự kiến</th>
+                        <th><i class="fas fa-chart-bar me-1"></i> Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><span class="badge bg-primary">@item.MaHP</span></td>
+                            <td>@item.TenHP</td>
+                            <td>
+                                <span class="badge bg-info">@item.SoTinChi</span>
+                            </td>
+                            <td>@item.SoLuongDuKien</td>
+                            <td>
+                                @if (item.SoLuongDuKien > 10)
+                                {
+                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i> Còn chỗ</span>
+                                }
+                                else if (item.SoLuongDuKien > 0)
+                                {
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-exclamation-circle me-1"></i> Sắp đầy</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i> Đã đầy</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

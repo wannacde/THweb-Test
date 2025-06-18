@@ -1,0 +1,65 @@
+@model THWeb_Test.Models.DangKy
+
+@{
+    ViewData["Title"] = "Đăng ký thành công";
+}
+
+<div class="card mb-4">
+    <div class="card-header bg-success text-white">
+        <h3 class="mb-0"><i class="fas fa-check-circle me-2"></i>Đăng ký học phần thành công!</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Thông tin đăng ký</h5>
+                        <p><i class="fas fa-hashtag me-2"></i>Mã đăng ký: <strong>@Model.MaDK</strong></p>
+                        <p><i class="fas fa-calendar me-2"></i>Ngày đăng ký: <strong>@(Model.NgayDK?.ToString("dd/MM/yyyy"))</strong></p>
+                        <p><i class="fas fa-book me-2"></i>Số học phần: <strong>@Model.ChiTietDangKys.Count</strong></p>
+                        <p><i class="fas fa-award me-2"></i>Tổng số tín chỉ: <strong>@Model.ChiTietDangKys.Sum(c => c.HocPhan?.SoTinChi ?? 0)</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <i class="fas fa-graduation-cap fa-5x text-success mb-3"></i>
+                    <h4>Chúc mừng bạn đã đăng ký thành công!</h4>
+                    <p class="text-muted">Bạn có thể xem chi tiết đăng ký bên dưới</p>
+                </div>
+            </div>
+        </div>
+
+        <h4><i class="fas fa-list me-2"></i>Danh sách học phần đã đăng ký</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-hashtag me-1"></i> Mã HP</th>
+                        <th><i class="fas fa-book-open me-1"></i> Tên học phần</th>
+                        <th><i class="fas fa-award me-1"></i> Số tín chỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ChiTietDangKys)
+                    {
+                        <tr>
+                            <td><span class="badge bg-primary">@item.MaHP</span></td>
+                            <td>@item.HocPhan?.TenHP</td>
+                            <td><span class="badge bg-info">@item.HocPhan?.SoTinChi</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="DangKy" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-1"></i> Tiếp tục đăng ký
+            </a>
+            <a asp-action="DangKyCuaToi" class="btn btn-info">
+                <i class="fas fa-clipboard-list me-1"></i> Xem tất cả đăng ký
+            </a>
+        </div>
+    </div>
+</div>
